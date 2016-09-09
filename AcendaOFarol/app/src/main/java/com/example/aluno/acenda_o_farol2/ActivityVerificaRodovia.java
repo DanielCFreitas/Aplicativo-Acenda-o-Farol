@@ -27,7 +27,6 @@ public class ActivityVerificaRodovia extends AppCompatActivity implements
         GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener {
 
     private TextView txvAcendeFarol;
-    private TextView txvRua;
     private ImageView imagemFarol;
 
     private Localizacao localizacao = new Localizacao(this);
@@ -43,8 +42,7 @@ public class ActivityVerificaRodovia extends AppCompatActivity implements
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_activity_verifica_rodovia);
 
-        txvAcendeFarol = (TextView) findViewById(R.id.txvAcendeFarol);
-        txvRua = (TextView) findViewById(R.id.txvRua);
+        txvAcendeFarol = (TextView) findViewById(R.id.statusFarol);
         imagemFarol = (ImageView) findViewById(R.id.imagemFarol);
 
         try {
@@ -113,7 +111,7 @@ public class ActivityVerificaRodovia extends AppCompatActivity implements
     /**
      * Método que vai para o botão de configurações do aplicativo
      */
-    private void btnConfiguracoes(View view){
+    public void btnConfiguracoes(View view){
         Intent myIntent = new Intent(ActivityVerificaRodovia.this, ActivityConfiguracoes.class);
         ActivityVerificaRodovia.this.startActivity(myIntent);
     }
@@ -139,11 +137,11 @@ public class ActivityVerificaRodovia extends AppCompatActivity implements
     public void onLocationChanged(Location location) {
         Toast.makeText(this, "Atualizado" ,Toast.LENGTH_SHORT).show();
 
-        if (localizacao.verificaAcenderFarol(this.rodovias, location, this.txvRua)){
-            this.txvAcendeFarol.setText("Acenda o Farol!");
+        if (localizacao.verificaAcenderFarol(this.rodovias, location)){
+            this.txvAcendeFarol.setText("ACENDA O FAROL");
             this.imagemFarol.setBackground(getResources().getDrawable(R.drawable.aceso));
         } else {
-            this.txvAcendeFarol.setText("Apague o Farol!");
+            this.txvAcendeFarol.setText("APAGUE O FAROL");
             this.imagemFarol.setBackground(getResources().getDrawable(R.drawable.apagado));
         }
     }

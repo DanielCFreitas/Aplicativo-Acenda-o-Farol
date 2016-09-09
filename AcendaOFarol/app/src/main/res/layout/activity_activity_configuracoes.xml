@@ -1,36 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorGreenTheme"
+    android:orientation="vertical"
+    android:background="@drawable/degrade"
     tools:context="com.example.aluno.acenda_o_farol2.ActivityConfiguracoes">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:orientation="horizontal"
+        android:layout_height="wrap_content"
         android:id="@+id/linearTop"
-        android:background="@color/colorRedTheme"
-        android:gravity="center"
-        android:layout_marginBottom="10dp">
-        <ImageButton
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            android:layout_alignParentRight="true"
-            android:id="@+id/btnConfig"
-            android:background="@drawable/backbutton2"
-            android:onClick="btnVoltar"/>
-
-        <TextView
-            android:layout_width="match_parent"
+        android:padding="15dp">
+        <Button
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Configurações"
-            android:textSize="40dp"
-            android:fontFamily="cursive"
-            android:layout_marginLeft="30dp"
-            android:textStyle="bold"/>
-
+            android:text="Voltar"
+            android:onClick="btnVoltar"
+            android:background="@drawable/botaotransparente"/>
     </LinearLayout>
 
     <LinearLayout
@@ -63,4 +50,4 @@
             android:id="@+id/switchAlertaVibra" />
     </LinearLayout>
 
-</RelativeLayout>
+</LinearLayout>

@@ -51,7 +51,7 @@ public class Localizacao{
     /**
      * Método que atraves da latitude e longitude verifica o endereco atual e se é necessário acender o Farol
      */
-    public boolean verificaAcenderFarol(LinkedList<Endereco> rodovias, Location location, TextView txvRua){
+    public boolean verificaAcenderFarol(LinkedList<Endereco> rodovias, Location location){
         Geocoder geocoder;
         String ruaDoGPS = "";
         this.latitudeLongitude.setLongitude(location.getLongitude());
@@ -71,7 +71,6 @@ public class Localizacao{
             dlg.setNeutralButton("OK", null);
             dlg.show();
         }
-        txvRua.setText(ruaDoGPS);
         this.ruaAtual.setEndereco(ruaDoGPS);
 
         if (this.ruaAtual.verificaRodovia(rodovias)){
