@@ -1,5 +1,8 @@
 package com.example.aluno.acenda_o_farol2;
 
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.StrictMode;
 
 import java.io.BufferedReader;
@@ -21,7 +24,11 @@ public class Connection{
     private final String USER_AGENT = "Mozilla/5.0";
 
 
-    // HTTP GET request
+    /**
+     * Método que faz a Requisicao para Internet
+     * @return retorna lista de Enderecos encontrados no JSON
+     * @throws Exception
+     */
     public LinkedList<Endereco> sendGet() throws Exception {
 
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
@@ -61,13 +68,15 @@ public class Connection{
         return found;
     }
 
+    /**
+     * Monta lista de Enderecos
+     * @param response
+     * @return
+     */
     public LinkedList<Endereco> findAllItems(JSONArray response) {
-
         LinkedList<Endereco> found = new LinkedList<Endereco>();
 
         try {
-
-
             for (int i = 0; i < response.length(); i++) {
                 JSONObject obj = response.getJSONObject(i);
                 found.add(new Endereco (obj.getString("nome_da_rua")));

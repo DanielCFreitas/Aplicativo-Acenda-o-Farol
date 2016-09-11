@@ -66,11 +66,9 @@ public class Localizacao{
             ruaDoGPS = addresses.get(0).getAddressLine(0);
             ruaDoGPS = ruaDoGPS.substring(0,ruaDoGPS.indexOf(","));
         } catch (IOException ex){
-            AlertDialog.Builder dlg = new AlertDialog.Builder(this.context);
-            dlg.setMessage("Problemas para conseguir o nome da rua" + ex.getMessage());
-            dlg.setNeutralButton("OK", null);
-            dlg.show();
+            Toast.makeText(this.context, "Problema de conexão com a Internet",Toast.LENGTH_SHORT).show();
         }
+
         this.ruaAtual.setEndereco(ruaDoGPS);
 
         if (this.ruaAtual.verificaRodovia(rodovias)){

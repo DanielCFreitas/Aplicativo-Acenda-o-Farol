@@ -137,12 +137,16 @@ public class ActivityVerificaRodovia extends AppCompatActivity implements
     public void onLocationChanged(Location location) {
         Toast.makeText(this, "Atualizado" ,Toast.LENGTH_SHORT).show();
 
-        if (localizacao.verificaAcenderFarol(this.rodovias, location)){
-            this.txvAcendeFarol.setText("ACENDA O FAROL");
-            this.imagemFarol.setBackground(getResources().getDrawable(R.drawable.aceso));
+        if (localizacao.verificaGPS()) {
+            if (localizacao.verificaAcenderFarol(this.rodovias, location)) {
+                this.txvAcendeFarol.setText("ACENDA O FAROL");
+                this.imagemFarol.setBackground(getResources().getDrawable(R.drawable.aceso));
+            } else {
+                this.txvAcendeFarol.setText("APAGUE O FAROL");
+                this.imagemFarol.setBackground(getResources().getDrawable(R.drawable.apagado));
+            }
         } else {
-            this.txvAcendeFarol.setText("APAGUE O FAROL");
-            this.imagemFarol.setBackground(getResources().getDrawable(R.drawable.apagado));
+            Toast.makeText(getApplicationContext(), "Problema de conexão com o GPS", Toast.LENGTH_SHORT).show();
         }
     }
 }
