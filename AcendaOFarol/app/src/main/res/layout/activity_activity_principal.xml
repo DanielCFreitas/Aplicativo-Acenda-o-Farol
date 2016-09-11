@@ -26,7 +26,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text= "Ative o GPS e clique no botão CONTINUAR para que nós te lembremos a hora de acender o farol."
+                    android:text= "Ative o GPS e a Internet do seu dispoitivo e clique no botão CONTINUAR para que nós te lembremos a hora de acender o farol."
                     android:textColor="@color/colorWhite"
                     android:id="@+id/txvPrincipal"
                     android:textSize="20dp"
@@ -46,7 +46,7 @@
                         android:background="@drawable/botaotransparente"
                         android:id="@+id/btnAtivar"
                         android:layout_marginLeft="10dp"
-                        android:text="Ativar"
+                        android:text="Ativar GPS"
                         android:onClick="eventoBtnAtivar"/>
 
                     <Button
