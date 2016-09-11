@@ -17,7 +17,6 @@ public class ActivityConfiguracoes extends AppCompatActivity {
      * Método que volta para a Activity anterior
      */
     public void btnVoltar(View view){
-        Intent myIntent = new Intent(ActivityConfiguracoes.this, ActivityVerificaRodovia.class);
-        ActivityConfiguracoes.this.startActivity(myIntent);
+        finish();
     }
 }

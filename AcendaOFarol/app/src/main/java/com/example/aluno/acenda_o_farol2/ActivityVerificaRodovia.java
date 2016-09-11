@@ -135,8 +135,6 @@ public class ActivityVerificaRodovia extends AppCompatActivity implements
     // MÉTODOS SOBRESCRITOS DA CLASSE LocationListener
     @Override
     public void onLocationChanged(Location location) {
-        Toast.makeText(this, "Atualizado" ,Toast.LENGTH_SHORT).show();
-
         if (localizacao.verificaGPS()) {
             if (localizacao.verificaAcenderFarol(this.rodovias, location)) {
                 this.txvAcendeFarol.setText("ACENDA O FAROL");

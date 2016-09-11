@@ -63,8 +63,13 @@ public class Localizacao{
             List<Address> addresses = geocoder.getFromLocation(this.latitudeLongitude.getLatitude(),
                                                  this.latitudeLongitude.getLongitude(),
                                                   1); // Latitude, Longitude, Quantidade de ruas que devem ser retornadas
-            ruaDoGPS = addresses.get(0).getAddressLine(0);
-            ruaDoGPS = ruaDoGPS.substring(0,ruaDoGPS.indexOf(","));
+            if (addresses.get(0) != null) {
+                ruaDoGPS = addresses.get(0).getAddressLine(0);
+                ruaDoGPS = ruaDoGPS.substring(0, ruaDoGPS.indexOf(","));
+            } else {
+                Toast.makeText(this.context, "Localização Indisponível", Toast.LENGTH_LONG);
+                return false;
+            }
         } catch (IOException ex){
             Toast.makeText(this.context, "Problema de conexão com a Internet",Toast.LENGTH_SHORT).show();
         }
