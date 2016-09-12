@@ -28,7 +28,7 @@ public class Localizacao{
     private final Context context;
     private LocationManager locationManager;
     private LatitudeLongitude latitudeLongitude;
-    private Endereco ruaAtual;
+    private Endereco endereco;
 
     /**
      * Método Construtor
@@ -37,7 +37,7 @@ public class Localizacao{
     public Localizacao(Context context){
         this.context = context;
         this.latitudeLongitude = new LatitudeLongitude();
-        this.ruaAtual = new Endereco();
+        this.endereco = new Endereco();
     }
 
     /**
@@ -54,29 +54,33 @@ public class Localizacao{
     public boolean verificaAcenderFarol(LinkedList<Endereco> rodovias, Location location){
         Geocoder geocoder;
         String ruaDoGPS = "";
+        String cidadeDoGPS = "";
         this.latitudeLongitude.setLongitude(location.getLongitude());
         this.latitudeLongitude.setLatitude(location.getLatitude());
 
         geocoder = new Geocoder(this.context, Locale.getDefault());
         try {
-
             List<Address> addresses = geocoder.getFromLocation(this.latitudeLongitude.getLatitude(),
                                                  this.latitudeLongitude.getLongitude(),
                                                   1); // Latitude, Longitude, Quantidade de ruas que devem ser retornadas
-            if (addresses.get(0) != null) {
+            if (addresses.size()!=0) {
                 ruaDoGPS = addresses.get(0).getAddressLine(0);
+                cidadeDoGPS = addresses.get(0).getAddressLine(1);
+
                 ruaDoGPS = ruaDoGPS.substring(0, ruaDoGPS.indexOf(","));
+                cidadeDoGPS = cidadeDoGPS.substring(0,cidadeDoGPS.indexOf("-"));
             } else {
-                Toast.makeText(this.context, "Localização Indisponível", Toast.LENGTH_LONG);
+                Toast.makeText(this.context, "Localização Indisponível", Toast.LENGTH_LONG).show();
                 return false;
             }
         } catch (IOException ex){
             Toast.makeText(this.context, "Problema de conexão com a Internet",Toast.LENGTH_SHORT).show();
         }
 
-        this.ruaAtual.setEndereco(ruaDoGPS);
+        this.endereco.setRuaAtual(ruaDoGPS);
+        this.endereco.setCidade(cidadeDoGPS);
 
-        if (this.ruaAtual.verificaRodovia(rodovias)){
+        if (this.endereco.verificaRodovia(rodovias)){
             return true;
         } else{
             return false;

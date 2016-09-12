@@ -4,11 +4,15 @@ import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.StrictMode;
+import android.util.Log;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.LinkedList;
 
 import org.json.JSONArray;
@@ -29,14 +33,14 @@ public class Connection{
      * @return retorna lista de Enderecos encontrados no JSON
      * @throws Exception
      */
-    public LinkedList<Endereco> sendGet() throws Exception {
+    public HashMap<String, ArrayList<String>> sendGet() throws Exception {
 
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
 
         //https://api.myjson.com/bins/3kpyw
         //http://api.flickr.com/services/feeds/photos_public.gne?tags=beatles&format=json&jsoncallback=?
-        String url = "https://api.myjson.com/bins/4wa2k";
+        String url = "https://api.myjson.com/bins/43pdi";
 
         URL obj = new URL(url);
         HttpURLConnection con = (HttpURLConnection) obj.openConnection();
@@ -63,7 +67,7 @@ public class Connection{
 
         //System.out.println(response.toString());
 
-        LinkedList<Endereco> found = findAllItems(new JSONArray(response.toString()));
+        HashMap<String, ArrayList<String>> found = findAllItems(new JSONArray(response.toString()));
 
         return found;
     }
@@ -73,15 +77,26 @@ public class Connection{
      * @param response
      * @return
      */
-    public LinkedList<Endereco> findAllItems(JSONArray response) {
-        LinkedList<Endereco> found = new LinkedList<Endereco>();
+    public HashMap<String, ArrayList<String>> findAllItems(JSONArray response) {
+        HashMap<String, ArrayList<String>> found = new HashMap<String, ArrayList<String>>();
 
         try {
             for (int i = 0; i < response.length(); i++) {
                 JSONObject obj = response.getJSONObject(i);
-                found.add(new Endereco (obj.getString("nome_da_rua")));
-            }
+                Iterator<String> chave = obj.keys();
+                String cidadeAtual = chave.next();
 
+                ArrayList<String> listaRodovias = new ArrayList<String>();
+                JSONArray jArray = obj.getJSONArray(cidadeAtual);
+
+                if (jArray != null) {
+                    for (int indice=0;indice<jArray.length();indice++){
+                        listaRodovias.add(jArray.get(indice).toString());
+                    }
+                }
+
+                found.put(cidadeAtual,listaRodovias);
+            }
         } catch (JSONException e) {
             // handle exception
         }

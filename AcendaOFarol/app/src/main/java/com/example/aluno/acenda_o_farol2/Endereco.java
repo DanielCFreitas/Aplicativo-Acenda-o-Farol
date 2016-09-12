@@ -7,25 +7,34 @@ import java.util.LinkedList;
  */
 public class Endereco {
 
-    private String endereco;
+    private String rua;
+    private String cidade;
 
     // Construtores
     public Endereco(){
 
     }
 
-    public Endereco (String endereco){
-        this.endereco = endereco;
+    public Endereco(String rua, String cidade){
+        this.rua = rua;
+        this.cidade = cidade;
     }
-
 
     // GETTERS E SETTERS
     public String getEndereco(){
-        return this.endereco;
+        return this.rua;
     }
 
-    public void setEndereco(String endereco){
-        this.endereco = endereco;
+    public void setRuaAtual(String rua){
+        this.rua = rua;
+    }
+
+    public String getCidade(){
+        return this.cidade;
+    }
+
+    public void setCidade(String cidade){
+        this.cidade = cidade;
     }
 
     /** Método que verifica se o motorista está em uma rodovia     *
@@ -34,7 +43,7 @@ public class Endereco {
      */
     public boolean verificaRodovia(LinkedList<Endereco> rodovias){
         for (Endereco rodovia : rodovias){
-            if (this.endereco.equals(rodovia.getEndereco())){
+            if (this.rua.equals(rodovia.getEndereco())){
                 return true;
             }
         }

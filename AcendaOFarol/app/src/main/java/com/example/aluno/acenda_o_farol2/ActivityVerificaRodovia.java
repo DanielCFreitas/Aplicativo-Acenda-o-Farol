@@ -21,7 +21,8 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
 
-import java.util.LinkedList;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 public class ActivityVerificaRodovia extends AppCompatActivity implements
         GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener {
@@ -33,7 +34,7 @@ public class ActivityVerificaRodovia extends AppCompatActivity implements
     private GoogleApiClient mGoogleApiClient;
     private LocationRequest locationRequest;
     private Connection conn = new Connection();
-    private LinkedList<Endereco> rodovias;
+    private HashMap<String, ArrayList<String>> rodovias;
 
     public final static int MILISEGUNDOS_POR_SEGUNDOS = 1000;
 
@@ -135,14 +136,14 @@ public class ActivityVerificaRodovia extends AppCompatActivity implements
     // MÉTODOS SOBRESCRITOS DA CLASSE LocationListener
     @Override
     public void onLocationChanged(Location location) {
-        if (localizacao.verificaGPS()) {
+        if (localizacao.verificaGPS()) {/*
             if (localizacao.verificaAcenderFarol(this.rodovias, location)) {
                 this.txvAcendeFarol.setText("ACENDA O FAROL");
                 this.imagemFarol.setBackground(getResources().getDrawable(R.drawable.aceso));
             } else {
                 this.txvAcendeFarol.setText("APAGUE O FAROL");
                 this.imagemFarol.setBackground(getResources().getDrawable(R.drawable.apagado));
-            }
+            }*/
         } else {
             Toast.makeText(getApplicationContext(), "Problema de conexão com o GPS", Toast.LENGTH_SHORT).show();
         }
