@@ -1,9 +1,9 @@
 package com.example.aluno.acenda_o_farol2;
 
-import java.util.LinkedList;
+import java.util.ArrayList;
 
 /**
- * Classe que representa um Endereco
+ * Classe que representa um Endereco atual do motorista
  */
 public class Endereco {
 
@@ -21,11 +21,11 @@ public class Endereco {
     }
 
     // GETTERS E SETTERS
-    public String getEndereco(){
+    public String getRua(){
         return this.rua;
     }
 
-    public void setRuaAtual(String rua){
+    public void setRua(String rua){
         this.rua = rua;
     }
 
@@ -41,9 +41,9 @@ public class Endereco {
      * @param rodovias Lista de rodovias
      * @return Retorna True se for uma rodovia e False se não for rodovia
      */
-    public boolean verificaRodovia(LinkedList<Endereco> rodovias){
-        for (Endereco rodovia : rodovias){
-            if (this.rua.equals(rodovia.getEndereco())){
+    public boolean verificaRodovia(ArrayList<String> rodovias){
+        for (String rodovia : rodovias){
+            if (this.rua.equals(rodovia)){
                 return true;
             }
         }

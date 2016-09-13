@@ -25,15 +25,12 @@ import org.json.JSONObject;
 
 public class Connection{
 
-    private final String USER_AGENT = "Mozilla/5.0";
-
-
     /**
      * Método que faz a Requisicao para Internet
      * @return retorna lista de Enderecos encontrados no JSON
      * @throws Exception
      */
-    public HashMap<String, ArrayList<String>> sendGet() throws Exception {
+    public static HashMap<String, ArrayList<String>> sendGet() throws Exception {
 
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
@@ -49,7 +46,7 @@ public class Connection{
         con.setRequestMethod("GET");
 
         //add request header
-        con.setRequestProperty("User-Agent", USER_AGENT);
+        con.setRequestProperty("User-Agent", "Mozilla/5.0");
 
         int responseCode = con.getResponseCode();
         System.out.println("\nSending 'GET' request to URL : " + url);
@@ -77,14 +74,14 @@ public class Connection{
      * @param response
      * @return
      */
-    public HashMap<String, ArrayList<String>> findAllItems(JSONArray response) {
+    public static HashMap<String, ArrayList<String>> findAllItems(JSONArray response) {
         HashMap<String, ArrayList<String>> found = new HashMap<String, ArrayList<String>>();
 
         try {
             for (int i = 0; i < response.length(); i++) {
                 JSONObject obj = response.getJSONObject(i);
                 Iterator<String> chave = obj.keys();
-                String cidadeAtual = chave.next();
+                String cidadeAtual = chave.next().trim();
 
                 ArrayList<String> listaRodovias = new ArrayList<String>();
                 JSONArray jArray = obj.getJSONArray(cidadeAtual);

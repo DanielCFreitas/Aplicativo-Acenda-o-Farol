@@ -21,9 +21,6 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-
 public class ActivityVerificaRodovia extends AppCompatActivity implements
         GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener {
 
@@ -33,8 +30,7 @@ public class ActivityVerificaRodovia extends AppCompatActivity implements
     private Localizacao localizacao = new Localizacao(this);
     private GoogleApiClient mGoogleApiClient;
     private LocationRequest locationRequest;
-    private Connection conn = new Connection();
-    private HashMap<String, ArrayList<String>> rodovias;
+    private Rodovias rodovias = new Rodovias();
 
     public final static int MILISEGUNDOS_POR_SEGUNDOS = 1000;
 
@@ -45,12 +41,6 @@ public class ActivityVerificaRodovia extends AppCompatActivity implements
 
         txvAcendeFarol = (TextView) findViewById(R.id.statusFarol);
         imagemFarol = (ImageView) findViewById(R.id.imagemFarol);
-
-        try {
-            rodovias = conn.sendGet();
-        } catch(Exception e){
-            Toast.makeText(this,"Erro: " + e.toString(),Toast.LENGTH_LONG);
-        }
 
         //Conectando com o Google API Services
         if (mGoogleApiClient == null) {
@@ -136,14 +126,26 @@ public class ActivityVerificaRodovia extends AppCompatActivity implements
     // MÉTODOS SOBRESCRITOS DA CLASSE LocationListener
     @Override
     public void onLocationChanged(Location location) {
-        if (localizacao.verificaGPS()) {/*
-            if (localizacao.verificaAcenderFarol(this.rodovias, location)) {
+        if (localizacao.verificaGPS()) {
+            if (this.localizacao.getEndereco().getRua() == null){
+                this.localizacao.atualizaEnderecoAtual(location);
+            }
+
+            String cidadeAnterior = this.localizacao.getEndereco().getCidade();
+            this.localizacao.atualizaEnderecoAtual(location);
+
+            if (this.localizacao.verificaSeEstaEmOutraCidade(cidadeAnterior)){
+                this.rodovias.atualizarListaDeRodovias(this.localizacao.getEndereco().getCidade());
+            }
+
+            if (localizacao.verificaSeEstaEmUmaRodovia(this.rodovias.getRodoviasDaCidadeAtual(), this.localizacao.getEndereco().getRua())) {
                 this.txvAcendeFarol.setText("ACENDA O FAROL");
                 this.imagemFarol.setBackground(getResources().getDrawable(R.drawable.aceso));
             } else {
                 this.txvAcendeFarol.setText("APAGUE O FAROL");
                 this.imagemFarol.setBackground(getResources().getDrawable(R.drawable.apagado));
-            }*/
+            }
+
         } else {
             Toast.makeText(getApplicationContext(), "Problema de conexão com o GPS", Toast.LENGTH_SHORT).show();
         }

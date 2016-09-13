@@ -16,6 +16,8 @@ import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
@@ -29,6 +31,11 @@ public class Localizacao{
     private LocationManager locationManager;
     private LatitudeLongitude latitudeLongitude;
     private Endereco endereco;
+
+    // Getters e Setters
+    public Endereco getEndereco(){
+        return this.endereco;
+    }
 
     /**
      * Método Construtor
@@ -49,41 +56,55 @@ public class Localizacao{
     }
 
     /**
-     * Método que atraves da latitude e longitude verifica o endereco atual e se é necessário acender o Farol
+     * Verifica se o motorista esta em outra cidade cidade
+     * @param cidadeAtual cidade atual que o motorista se encontra
+     * @return retorna verdadeiro se esta na mesma cidade e false se estiver em outra
      */
-    public boolean verificaAcenderFarol(LinkedList<Endereco> rodovias, Location location){
+    public boolean verificaSeEstaEmOutraCidade(String cidadeAtual){
+        return cidadeAtual.equals(this.endereco.getCidade());
+    }
+
+    /**
+     * Método que verifica se o motorista esta em uma rodovia
+     * @param rodovias Lista com as rodovias
+     * @param enderecoAtual Rua atual do motorista
+     * @return Retorna true se o motorista estiver em uma rodovia caso contrario retorna false
+     */
+    public boolean verificaSeEstaEmUmaRodovia(ArrayList<String> rodovias, String enderecoAtual){
+        for (String rodovia : rodovias){
+            if (rodovia.equals(enderecoAtual)){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Método que atualiza a rua e a cidade atual do motorista
+     * @param location envia um location que contem as informacoes de latitude e longitude
+     */
+    public void atualizaEnderecoAtual(Location location){
         Geocoder geocoder;
-        String ruaDoGPS = "";
-        String cidadeDoGPS = "";
         this.latitudeLongitude.setLongitude(location.getLongitude());
         this.latitudeLongitude.setLatitude(location.getLatitude());
 
         geocoder = new Geocoder(this.context, Locale.getDefault());
+
         try {
             List<Address> addresses = geocoder.getFromLocation(this.latitudeLongitude.getLatitude(),
-                                                 this.latitudeLongitude.getLongitude(),
-                                                  1); // Latitude, Longitude, Quantidade de ruas que devem ser retornadas
+                    this.latitudeLongitude.getLongitude(),
+                    1); // Latitude, Longitude, Quantidade de ruas que devem ser retornadas
             if (addresses.size()!=0) {
-                ruaDoGPS = addresses.get(0).getAddressLine(0);
-                cidadeDoGPS = addresses.get(0).getAddressLine(1);
+                this.endereco.setRua(addresses.get(0).getAddressLine(0));
+                this.endereco.setCidade(addresses.get(0).getAddressLine(1));
 
-                ruaDoGPS = ruaDoGPS.substring(0, ruaDoGPS.indexOf(","));
-                cidadeDoGPS = cidadeDoGPS.substring(0,cidadeDoGPS.indexOf("-"));
+                this.endereco.setRua(this.endereco.getRua().substring(0, this.endereco.getRua().indexOf(",")).trim());
+                this.endereco.setCidade(this.endereco.getCidade().substring(0,this.endereco.getCidade().indexOf("-")).trim());
             } else {
                 Toast.makeText(this.context, "Localização Indisponível", Toast.LENGTH_LONG).show();
-                return false;
             }
         } catch (IOException ex){
             Toast.makeText(this.context, "Problema de conexão com a Internet",Toast.LENGTH_SHORT).show();
-        }
-
-        this.endereco.setRuaAtual(ruaDoGPS);
-        this.endereco.setCidade(cidadeDoGPS);
-
-        if (this.endereco.verificaRodovia(rodovias)){
-            return true;
-        } else{
-            return false;
         }
     }
 
