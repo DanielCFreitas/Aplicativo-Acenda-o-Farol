@@ -103,7 +103,7 @@ public class Localizacao{
             } else {
                 Toast.makeText(this.context, "Localização Indisponível", Toast.LENGTH_LONG).show();
             }
-        } catch (IOException ex){
+        } catch (Exception ex){
             Toast.makeText(this.context, "Problema de conexão com a Internet",Toast.LENGTH_SHORT).show();
         }
     }
