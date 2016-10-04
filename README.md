@@ -17,3 +17,6 @@ Aqui é onde o motorista será lembrado quando deve ligar ou desligar o farol do
 Esta é a tela onde ele define como o motorista deseja ser notificado que é necessário acender o farol, além da imagem ele pode escolher em deixar ligado o alerta sonoro ou o vibra do celular
 
 ![alt tag](http://i.imgur.com/aOZZbTq.png)
+
+#Diagrama de Classes
+![alt tag](http://i.imgur.com/sv26EEz.jpg)
