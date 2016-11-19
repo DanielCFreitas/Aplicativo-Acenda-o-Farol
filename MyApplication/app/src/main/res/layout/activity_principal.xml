@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@drawable/background"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    tools:context="com.example.daniel.acendaofarol.PrincipalActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:layout_marginTop="-50dp"
+        android:id="@+id/linearTopo">
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/topo"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/linearBaixo"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text= "Ative o GPS e a Internet do seu dispoitivo e clique no botão CONTINUAR para que nós te lembremos a hora de acender o farol."
+            android:textColor="@color/colorWhite"
+            android:id="@+id/txvPrincipal"
+            android:textSize="20dp"
+            android:fontFamily="serif"
+            android:padding="15dp"
+            android:gravity="center"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:orientation="horizontal"
+            android:gravity="center">
+            <Button
+                android:layout_width="100dp"
+                android:layout_height="50dp"
+                android:background="@drawable/botaotransparente"
+                android:id="@+id/btnAtivar"
+                android:layout_marginLeft="10dp"
+                android:text="Ativar GPS"
+                android:onClick="eventoBtnAtivar"/>
+
+            <Button
+                android:layout_width="100dp"
+                android:layout_height="50dp"
+                android:background="@drawable/botaotransparente"
+                android:id="@+id/btnContinuar"
+                android:layout_marginLeft="10dp"
+                android:text="Continuar"
+                android:onClick="eventoBtnContinuar"/>
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+</LinearLayout>

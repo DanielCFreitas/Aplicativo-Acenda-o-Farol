@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Acenda O Farol</string>
+    <string name="title_activity_verifica_rodovia">VerificaRodoviaActivity</string>
+    <string name="numero_da_lei">LEI Nº 13.290</string>
+    <string name="data_da_lei">DE 23 DE MAIO DE 2016</string>
+    <string name="artigo_40_da_lei">Art. 40. I - o condutor manterá acesos os faróis do veículo, utilizando luz baixa, durante a noite e durante o dia nos túneis providos de iluminação pública e nas rodovias;</string>
+    <string name="contato_text">Mantenha o contato com a gente, nos envie sugestões para melhorar o aplicativo, caso alguma rodovia da sua cidade o aplicativo não te lembra de acender o farol, nos envie o nome da rodovia para correção.</string>
+</resources>
