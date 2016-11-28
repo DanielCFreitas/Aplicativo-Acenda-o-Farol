@@ -38,3 +38,8 @@ Funcionalidades adicionadas: Tela de Contatos com o usuário e Tela contendo a L
 
 ![alt tag](http://i.imgur.com/tQGCfjd.png)
 ![alt tag](http://i.imgur.com/EfJR24Z.png)
+
+
+#Diagrama de Classes
+
+![alt tag](http://i.imgur.com/RjQGywa.jpg)
