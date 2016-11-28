@@ -1,6 +1,7 @@
 # Aplicativo Acenda o Farol
 Aplicativo feito para dispositivos Android que serve para alertar o motorista para acendar o farol do carro em rodovias, segundo a nova lei é proibido andar com o farol apagado em rodovias federais e estaduais.
 
+#VERSÃO 1.0 DO APLICATIVO
 #Tela Inicial do Aplicativo
 A tela inicial é onde é necessário a confirmação do usuário se o GPS está ativo, para prosseguir é necessário ativar, caso contrário ele não consegue utilizar o aplicativo
 
@@ -20,3 +21,19 @@ Esta é a tela onde ele define como o motorista deseja ser notificado que é nec
 
 #Diagrama de Classes
 ![alt tag](http://i.imgur.com/sv26EEz.jpg)
+
+
+
+#VERSÃO 2.0 DO APLICATIVO
+
+#Tela Principal do Aplicativo
+
+![alt tag](http://i.imgur.com/0kqSSIO.png)
+![alt tag](http://i.imgur.com/tLPMNSE.png)
+
+#Funcionalidades adicionadas
+
+Funcionalidades adicionadas: Tela de Contatos com o usuário e Tela contendo a Lei do Farol
+
+![alt tag](http://i.imgur.com/tQGCfjd.png)
+![alt tag](http://i.imgur.com/EfJR24Z.png)
