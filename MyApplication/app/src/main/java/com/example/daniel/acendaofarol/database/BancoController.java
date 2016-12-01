@@ -27,6 +27,8 @@ public class BancoController {
     public void iniciaBanco(){
         ContentValues valores;
 
+
+
         db = banco.getWritableDatabase();
         valores = new ContentValues();
         valores.put(CriaBanco.CAMPO_ID, 0);
@@ -41,13 +43,14 @@ public class BancoController {
     public Alerta carregaDados(){
         Cursor cursor;
         String[] campos =  {banco.CAMPO_SOM,banco.CAMPO_VIBRA};
+
         db = banco.getReadableDatabase();
         cursor = db.query(banco.TABELA, campos, null, null, null, null, null, null);
 
-        if(cursor!=null){
-            cursor.moveToFirst();
-        } else {
+        if(cursor.moveToFirst() == false){
             iniciaBanco();
+            cursor = db.query(banco.TABELA, campos, null, null, null, null, null, null);
+            cursor.moveToFirst();
         }
 
         Alerta alerta = new Alerta(this.context);
